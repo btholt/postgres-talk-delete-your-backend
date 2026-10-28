@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="social-card" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#101412"/>
+  <g font-family="Source Sans Pro, Arial, sans-serif">
+    <text x="72" y="91" fill="#c9f267" font-size="17" font-weight="600" letter-spacing="3">BRIAN HOLT / POSTGRES</text>
+    <g fill="#f4f3e9" font-size="116" font-weight="600" letter-spacing="-4">
+      <text x="68" y="235">Delete your</text>
+      <text x="68" y="355">backend<tspan fill="#c9f267">.</tspan></text>
+    </g>
+    <text x="74" y="430" fill="#d7ddce" font-size="32">Your whole stack, inside Postgres.</text>
+    <path d="M72 523h1056" stroke="#303a32" stroke-width="2"/>
+    <text x="72" y="576" fill="#9da69f" font-size="24">A talk about deleting unnecessary infrastructure.</text>
+    <text x="1128" y="576" fill="#c9f267" font-size="28" font-weight="600" text-anchor="end">holt.fyi/dyb</text>
+  </g>
+  <image href="./favicon.svg" x="870" y="155" width="250" height="250"/>
+</svg>

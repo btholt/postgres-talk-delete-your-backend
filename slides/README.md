@@ -148,6 +148,21 @@ The Microsoft wordmark in the intro and persistent speaker-credit footer, plus t
 
 If VS Code's integrated browser blocks the speaker popup, use the presentation URL in a regular browser.
 
+## Sharing and icons
+
+The deck's static HTML includes its title, description, canonical URL, Open Graph metadata, and a large-image Twitter card. Sharing [holt.fyi/dyb](https://holt.fyi/dyb) redirects to the same public deck. Crawlers do not need to execute JavaScript or contact the local demo.
+
+The original [slashed-database favicon](./public/favicon.svg) matches the deck's dark green/lime palette and is used by the slides, speaker window, and API docs. PNG fallbacks include a 32px favicon and a 180px Apple touch icon. The [1200x630 social preview](./public/social-card.png) includes the talk title, Brian's name, and the short link.
+
+Edit [favicon.svg](./public/favicon.svg) or [social-card.svg](./public/social-card.svg), then regenerate the committed PNGs:
+
+```sh
+npm run generate:social
+npm test
+```
+
+The generator reuses the existing isolated headless browser helper and bundled Source Sans Pro fonts; it needs no Docker or live services. Like screenshot capture, it defaults to Microsoft Edge on this Mac; set `BROWSER_BIN` to another Chromium executable if needed. CI deploys the committed images without launching a browser. If the public hosting URL changes, update the canonical and absolute social-image URLs in [index.html](./index.html).
+
 ## Build a standalone deck
 
 ```sh

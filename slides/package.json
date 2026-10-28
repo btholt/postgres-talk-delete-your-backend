@@ -10,6 +10,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "node --test",
+    "generate:social": "node scripts/generate-social-assets.mjs",
     "capture:images": "node scripts/capture-images.mjs",
     "capture:api-specs": "node scripts/capture-api-specs.mjs"
   },
