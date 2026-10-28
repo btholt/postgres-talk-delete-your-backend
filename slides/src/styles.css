@@ -55,6 +55,7 @@ select { max-width: 265px; padding: 9px 30px 9px 12px; background: #1d251f; bord
 .reveal .eyebrow { font-size: 16px; font-weight: 600; letter-spacing: 3px; color: var(--accent); margin: 0 0 28px; }
 .reveal .lede { color: #d7ddce; font-size: 42px; letter-spacing: -.8px; margin-top: 32px; }
 .reveal .slide-caption { font-size: 19px; color: #869488; margin-top: 58px; }
+.reveal .talk-link { font-size: 48px; font-weight: 600; color: var(--accent); }
 .reveal a { text-decoration-color: #536946; text-underline-offset: 6px; }
 .reveal a:hover { color: var(--accent); }
 .reveal .role-line { margin-top: 6px; font-size: 31px; color: #c1ccbc; }

@@ -70,6 +70,7 @@ Optional speaker view reads its brief bullets from the Slide sections in this gu
 
 - How much architecture does this product actually need?
 - Fewer services, not fewer responsibilities.
+- Share the talk link: https://holt.fyi/dyb.
 - Before presenting: checkpoint 00 ready.
 
 ## Slide 2: Brian Holt
@@ -802,10 +803,11 @@ Skip this if the React proof has already landed; there is no need to repeat the 
 - Point to the VS Code extension, pghacker, pgvector, DiskANN, and pg_durable.
 - Share Twitter @holtbt and LinkedIn linkedin.com/in/btholt.
 - Hold this slide for questions and any remaining recovery buffer.
-- Share the demo repository and its image-only GitHub Pages presentation.
+- Leave https://holt.fyi/dyb visible for the deck and demo repository.
 
 ### Links to leave visible
 
+- [Talk short link](https://holt.fyi/dyb)
 - [Demo repository](https://github.com/btholt/postgres-talk-delete-your-backend)
 - [Presentation](https://btholt.github.io/postgres-talk-delete-your-backend/)
 - [VS Code + Postgres](https://marketplace.visualstudio.com/items?itemName=ms-ossdata.vscode-pgsql)

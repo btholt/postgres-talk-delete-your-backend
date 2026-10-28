@@ -6,6 +6,8 @@
 
 <p class="lede">Your whole stack, inside Postgres.</p>
 
+<p class="slide-caption"><a href="https://holt.fyi/dyb" target="_blank" rel="noopener noreferrer">holt.fyi/dyb</a></p>
+
 ---
 
 <!-- .slide: id="brian" data-layout="content" -->
@@ -343,6 +345,8 @@
 <p class="eyebrow">THANK YOU / BRIAN HOLT</p>
 
 ## Delete what<br />you don't need<span class="accent">.</span>
+
+<p class="talk-link"><a href="https://holt.fyi/dyb" target="_blank" rel="noopener noreferrer">holt.fyi/dyb</a></p>
 
 <div class="resource-links">
   <a href="https://github.com/btholt/postgres-talk-delete-your-backend" target="_blank" rel="noopener noreferrer">Demo repository</a>

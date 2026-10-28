@@ -83,6 +83,13 @@ test('DiskANN stays a footnote outside closing resources and the SSR demo uses t
   assert.equal(slides.find(slide => slide.attributes.id === 'render').attributes['data-demo'], 'project');
 });
 
+test('opening and closing slides show the shareable talk URL', () => {
+  for (const id of ['opening', 'closing']) {
+    const slide = slides.find(slide => slide.attributes.id === id);
+    assert.match(slide.content, /<a\b[^>]*href="https:\/\/holt\.fyi\/dyb"[^>]*>holt\.fyi\/dyb<\/a>/, `${id}: missing talk short link`);
+  }
+});
+
 test('closing slide includes the requested project and speaker profile links', () => {
   const closing = slides.find(slide => slide.attributes.id === 'closing');
   for (const url of [
