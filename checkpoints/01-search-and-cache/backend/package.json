@@ -1,0 +1,20 @@
+{
+  "name": "kickstopper-original-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test test/*.test.js",
+    "test:integration": "node --test test/integration.js",
+    "test:postgres": "node --test test/postgres.js",
+    "test:search-plan": "node --test test/search-plan.js",
+    "check": "node --check src/server.js && node --check src/worker.js && node --check src/scheduler.js && node --check src/bootstrap.js"
+  },
+  "dependencies": {
+    "amqplib": "0.10.9",
+    "express": "5.3.0",
+    "pg": "8.16.3"
+  }
+}

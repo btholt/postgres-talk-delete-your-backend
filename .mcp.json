@@ -1,0 +1,8 @@
+{
+	"mcpServers": {
+		"pghacker": {
+			"url": "https://pghacker-mcp.dev/mcp",
+			"type": "http"
+		}
+	}
+}

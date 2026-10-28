@@ -1,0 +1,250 @@
+{
+  "capturedAt": "2026-10-27T15:15:13.220Z",
+  "images": [
+    {
+      "checkpoint": "00",
+      "route": "explore",
+      "src": "00/explore.webp",
+      "width": 1440,
+      "height": 2645
+    },
+    {
+      "checkpoint": "00",
+      "route": "architecture",
+      "src": "00/architecture.webp",
+      "width": 1440,
+      "height": 1248
+    },
+    {
+      "checkpoint": "00",
+      "route": "analytics",
+      "src": "00/analytics.webp",
+      "width": 1440,
+      "height": 1129
+    },
+    {
+      "checkpoint": "00",
+      "route": "funding",
+      "src": "00/funding.webp",
+      "width": 1440,
+      "height": 1206
+    },
+    {
+      "checkpoint": "00",
+      "route": "project",
+      "src": "00/project.webp",
+      "width": 1440,
+      "height": 1784
+    },
+    {
+      "checkpoint": "01",
+      "route": "explore",
+      "src": "01/explore.webp",
+      "width": 1440,
+      "height": 2645
+    },
+    {
+      "checkpoint": "01",
+      "route": "architecture",
+      "src": "01/architecture.webp",
+      "width": 1440,
+      "height": 1294
+    },
+    {
+      "checkpoint": "01",
+      "route": "analytics",
+      "src": "01/analytics.webp",
+      "width": 1440,
+      "height": 1129
+    },
+    {
+      "checkpoint": "01",
+      "route": "funding",
+      "src": "01/funding.webp",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "checkpoint": "01",
+      "route": "project",
+      "src": "01/project.webp",
+      "width": 1440,
+      "height": 1784
+    },
+    {
+      "checkpoint": "02",
+      "route": "explore",
+      "src": "02/explore.webp",
+      "width": 1440,
+      "height": 2645
+    },
+    {
+      "checkpoint": "02",
+      "route": "architecture",
+      "src": "02/architecture.webp",
+      "width": 1440,
+      "height": 1346
+    },
+    {
+      "checkpoint": "02",
+      "route": "analytics",
+      "src": "02/analytics.webp",
+      "width": 1440,
+      "height": 1129
+    },
+    {
+      "checkpoint": "02",
+      "route": "funding",
+      "src": "02/funding.webp",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "checkpoint": "02",
+      "route": "project",
+      "src": "02/project.webp",
+      "width": 1440,
+      "height": 1784
+    },
+    {
+      "checkpoint": "03",
+      "route": "explore",
+      "src": "03/explore.webp",
+      "width": 1440,
+      "height": 2645
+    },
+    {
+      "checkpoint": "03",
+      "route": "architecture",
+      "src": "03/architecture.webp",
+      "width": 1440,
+      "height": 1348
+    },
+    {
+      "checkpoint": "03",
+      "route": "analytics",
+      "src": "03/analytics.webp",
+      "width": 1440,
+      "height": 1129
+    },
+    {
+      "checkpoint": "03",
+      "route": "funding",
+      "src": "03/funding.webp",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "checkpoint": "03",
+      "route": "project",
+      "src": "03/project.webp",
+      "width": 1440,
+      "height": 1784
+    },
+    {
+      "checkpoint": "04",
+      "route": "explore",
+      "src": "04/explore.webp",
+      "width": 1440,
+      "height": 2645
+    },
+    {
+      "checkpoint": "04",
+      "route": "architecture",
+      "src": "04/architecture.webp",
+      "width": 1440,
+      "height": 1369
+    },
+    {
+      "checkpoint": "04",
+      "route": "analytics",
+      "src": "04/analytics.webp",
+      "width": 1440,
+      "height": 1129
+    },
+    {
+      "checkpoint": "04",
+      "route": "funding",
+      "src": "04/funding.webp",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "checkpoint": "04",
+      "route": "project",
+      "src": "04/project.webp",
+      "width": 1440,
+      "height": 1784
+    },
+    {
+      "checkpoint": "05",
+      "route": "explore",
+      "src": "05/explore.webp",
+      "width": 1440,
+      "height": 2645
+    },
+    {
+      "checkpoint": "05",
+      "route": "architecture",
+      "src": "05/architecture.webp",
+      "width": 1440,
+      "height": 1398
+    },
+    {
+      "checkpoint": "05",
+      "route": "analytics",
+      "src": "05/analytics.webp",
+      "width": 1440,
+      "height": 1129
+    },
+    {
+      "checkpoint": "05",
+      "route": "funding",
+      "src": "05/funding.webp",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "checkpoint": "05",
+      "route": "project",
+      "src": "05/project.webp",
+      "width": 1440,
+      "height": 1784
+    },
+    {
+      "checkpoint": "06",
+      "route": "explore",
+      "src": "06/explore.webp",
+      "width": 1440,
+      "height": 2645
+    },
+    {
+      "checkpoint": "06",
+      "route": "architecture",
+      "src": "06/architecture.webp",
+      "width": 1440,
+      "height": 1458
+    },
+    {
+      "checkpoint": "06",
+      "route": "analytics",
+      "src": "06/analytics.webp",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "checkpoint": "06",
+      "route": "funding",
+      "src": "06/funding.webp",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "checkpoint": "06",
+      "route": "project",
+      "src": "06/project.webp",
+      "width": 1440,
+      "height": 1784
+    }
+  ]
+}

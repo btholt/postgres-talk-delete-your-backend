@@ -1,0 +1,5 @@
+**/node_modules
+**/dist
+**/ssr-dist
+.env
+test-results

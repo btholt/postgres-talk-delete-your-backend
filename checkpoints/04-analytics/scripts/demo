@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+usage() {
+  echo "Usage: ./scripts/demo {prepare|start|stop|status|logs|reset} [--confirm-delete-demo-data]" >&2
+  echo "Use prepare --local to build with existing service images instead of pulling them." >&2
+}
+command="${1:-}"
+case "$command" in
+  prepare)
+    case "${2:-}" in
+      "") docker compose pull --ignore-buildable ;;
+      --local) ;;
+      *) usage; exit 2 ;;
+    esac
+    docker compose build
+    ;;
+  start)
+    docker compose up -d --no-build --pull never --wait --wait-timeout 240
+    echo "Kickstopper: http://localhost:3000 | Postgres: localhost:54320"
+    ;;
+  stop) docker compose stop ;;
+  status) docker compose ps ;;
+  logs) docker compose logs --tail 80 ;;
+  reset)
+    if [[ "${2:-}" != "--confirm-delete-demo-data" ]]; then
+      echo "Reset deletes only kickstopper-04-analytics demo volumes. To confirm:" >&2
+      echo "./scripts/demo reset --confirm-delete-demo-data" >&2
+      exit 2
+    fi
+    docker compose down --volumes
+    docker compose up -d --no-build --pull never --wait --wait-timeout 240
+    ;;
+  *) usage; exit 2 ;;
+esac

@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -euo pipefail
+root="$(cd "$(dirname "$0")/.." && pwd)"
+command="${1:-}"
+checkpoint="${2:-00}"
+case "$checkpoint" in
+  00|00-original) directory="00-original" ;;
+  01|01-search-and-cache) directory="01-search-and-cache" ;;
+  02|02-vectors) directory="02-vectors" ;;
+  03|03-durable-workflows) directory="03-durable-workflows" ;;
+  04|04-analytics) directory="04-analytics" ;;
+  05|05-generated-api) directory="05-generated-api" ;;
+  06|06-react-in-postgres) directory="06-react-in-postgres" ;;
+  *) echo "Unknown checkpoint: $checkpoint. Available: 00, 01, 02, 03, 04, 05, 06." >&2; exit 2 ;;
+esac
+if [[ $# -gt 2 ]]; then
+  exec "$root/checkpoints/$directory/scripts/demo" "$command" "${@:3}"
+else
+  exec "$root/checkpoints/$directory/scripts/demo" "$command"
+fi

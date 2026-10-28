@@ -1,0 +1,12 @@
+{
+  "name": "kickstopper-generated-api-tests",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test --test-concurrency=1 test/*.js"
+  },
+  "devDependencies": {
+    "pg": "8.16.3"
+  }
+}

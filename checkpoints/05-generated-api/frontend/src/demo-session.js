@@ -1,0 +1,2 @@
+// Public, non-expiring local-demo identity, not a database password or production credential.
+export const demoToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoid2ViX3VzZXIiLCJzdWIiOiIxMTExMTExMS0xMTExLTQxMTEtODExMS0xMTExMTExMTExMTEiLCJhdWQiOiJraWNrc3RvcHBlciJ9.4BW7IOBd3w5aBAWeftYYlyBA7-5Ytht3YXHRLg7vqb4";

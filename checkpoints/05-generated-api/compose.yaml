@@ -1,0 +1,93 @@
+name: kickstopper-05-generated-api
+
+services:
+  frontend:
+    image: kickstopper-05-frontend:local
+    build: ./frontend
+    ports:
+      - "127.0.0.1:3000:80"
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1/health"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+    restart: unless-stopped
+
+  api:
+    image: kickstopper-05-api:local
+    build: ./api
+    init: true
+    restart: unless-stopped
+    environment:
+      PGRST_DB_URI: postgresql://api_authenticator:postgrest-local@postgres:5432/${POSTGRES_DB:-kickstopper}?sslmode=disable
+      PGRST_DB_SCHEMAS: api
+      PGRST_DB_ANON_ROLE: web_anon
+      PGRST_DB_PRE_REQUEST: internal.check_request
+      PGRST_JWT_SECRET: kickstopper-local-demo-jwt-secret-not-for-production
+      PGRST_JWT_AUD: kickstopper
+      PGRST_SERVER_PORT: "3001"
+      PGRST_ADMIN_SERVER_PORT: "3002"
+      PGRST_OPENAPI_SERVER_PROXY_URI: http://localhost:3000/api
+      PGRST_DB_MAX_ROWS: "1000"
+    ports:
+      - "127.0.0.1:3001:3001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:3002/ready && wget -qO- http://127.0.0.1:3001/rpc/health"]
+      interval: 5s
+      timeout: 4s
+      retries: 24
+      start_period: 20s
+
+  postgres:
+    image: kickstopper-05-postgres:local
+    build: ./database
+    command:
+      - postgres
+      - -c
+      - shared_preload_libraries=pg_durable,pg_duckdb
+      - -c
+      - pg_durable.database=${POSTGRES_DB:-kickstopper}
+      - -c
+      - pg_durable.worker_role=${POSTGRES_USER:-kickstopper}
+      - -c
+      - pg_durable.host=/var/run/postgresql
+      - -c
+      - pg_durable.enable_superuser_instances=off
+      - -c
+      - pg_durable.http_security=disabled
+      - -c
+      - duckdb.max_memory=256
+      - -c
+      - duckdb.threads=2
+      - -c
+      - duckdb.autoinstall_known_extensions=false
+      - -c
+      - duckdb.autoload_known_extensions=false
+      - -c
+      - duckdb.enable_external_access=false
+      - -c
+      - duckdb.postgres_role=analytics_executor
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-kickstopper}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-kickstopper-local}
+      POSTGRES_DB: ${POSTGRES_DB:-kickstopper}
+    ports:
+      - "127.0.0.1:54320:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./database:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB && psql -X -qAt -U $$POSTGRES_USER -d $$POSTGRES_DB -c \"SELECT EXISTS(SELECT 1 FROM public.scheduled_work WHERE name='maintenance' AND last_success_at>clock_timestamp()-interval '30 seconds')\" | grep -qx t"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  postgres-data:

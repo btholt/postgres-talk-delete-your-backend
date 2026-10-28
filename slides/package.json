@@ -1,0 +1,23 @@
+{
+  "name": "delete-your-backend-slides",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node --test",
+    "capture:images": "node scripts/capture-images.mjs",
+    "capture:api-specs": "node scripts/capture-api-specs.mjs"
+  },
+  "dependencies": {
+    "reveal.js": "6.0.2",
+    "swagger-ui-dist": "5.34.0"
+  },
+  "devDependencies": {
+    "vite": "7.3.7"
+  }
+}

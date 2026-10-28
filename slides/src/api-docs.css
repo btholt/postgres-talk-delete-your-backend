@@ -1,0 +1,22 @@
+:root { color: #233027; background: #fafbf8; font-family: system-ui, sans-serif; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+[hidden] { display: none !important; }
+.api-header { display: flex; flex-wrap: wrap; align-items: center; gap: 20px; padding: 18px 30px; background: #101412; color: #edf2e8; }
+.api-header a { color: #c9f267; font-size: 15px; text-decoration: none; }
+.api-header strong { margin-right: auto; font-size: 19px; }
+.api-header label { display: flex; align-items: center; gap: 8px; font-size: 12px; }
+.api-header select, .api-header button { padding: 8px 10px; font: inherit; background: #1d251f; border: 1px solid #495649; border-radius: 5px; color: inherit; }
+.api-header button { cursor: pointer; }
+.api-header option:disabled { color: #777; }
+.api-notice, #api-error { max-width: 1460px; margin: 20px auto; padding: 0 20px; font-size: 13px; line-height: 1.6; }
+#api-status { font-weight: 600; color: #22532d; }
+#api-error { padding: 16px 20px; background: #ffe9e0; color: #792b16; }
+.swagger-ui .wrapper { max-width: 1460px; }
+.swagger-ui .info { margin: 25px 0; }
+.swagger-ui .scheme-container { background: #f0f3eb; box-shadow: none; }
+@media (max-width: 650px) {
+  .api-header { gap: 12px; padding: 16px; }
+  .api-header strong { width: 100%; }
+  .api-header label { flex-wrap: wrap; }
+}

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#101412" />
+    <title>Delete Your Backend | Presentation</title>
+  </head>
+  <body>
+    <header class="presenter-bar">
+      <a class="wordmark" href="#/opening">delete<span>/</span>your backend<span class="wordmark-dot">.</span></a>
+      <div class="checkpoint-control">
+        <span class="local-badge" id="mode-label">STATIC DECK</span>
+        <label for="demo-mode">Demo mode</label>
+        <select id="demo-mode">
+          <option value="live">Live</option>
+          <option value="images">Images</option>
+        </select>
+        <label for="checkpoint">Demo checkpoint</label>
+        <select id="checkpoint" disabled>
+          <option value="">Local presenter only</option>
+        </select>
+      </div>
+    </header>
+    <main id="stage" tabindex="-1">
+      <div class="reveal">
+        <div class="slides">
+          <section id="markdown-deck" data-markdown data-separator="^\r?\n---\r?\n" data-separator-notes="^Notes:">
+            <script type="text/template" id="deck-source"></script>
+          </section>
+        </div>
+      </div>
+    </main>
+    <footer class="presenter-footer">
+      <div class="presenter-credit"><span>Brian Holt</span><img src="./logos/microsoft-wordmark.svg" width="211" height="45" alt="Microsoft" /></div>
+      <div class="presentation-tools">
+        <button id="notes" title="Speaker notes (S)">Notes <kbd>S</kbd></button>
+        <button id="overview" title="Slide overview (O)">Overview <kbd>O</kbd></button>
+        <button id="fullscreen" title="Toggle fullscreen (F)">Fullscreen <kbd>F</kbd></button>
+      </div>
+      <nav aria-label="Slide navigation">
+        <button id="presenter-previous" aria-label="Previous slide or reveal" title="Previous (Left arrow)">&#8592;</button>
+        <span id="slide-count" aria-live="polite"></span>
+        <button id="presenter-next" aria-label="Next slide or reveal" title="Next (Right arrow)">&#8594;</button>
+      </nav>
+    </footer>
+    <details class="controller-status" id="controller-status" hidden>
+      <summary><span id="connection-status" role="status">Connecting to local demo...</span></summary>
+      <div class="controller-detail">
+        <p>Prepared checkpoints, not a live migration. Switching preserves each checkpoint's own data. No builds, downloads, or resets.</p>
+        <pre id="controller-log" aria-label="Checkpoint switch output"></pre>
+        <button id="retry-connection">Refresh status</button>
+      </div>
+    </details>
+    <div id="presentation-error" role="alert" hidden></div>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>

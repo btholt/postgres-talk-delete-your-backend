@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Speaker notes | Delete Your Backend</title>
+  </head>
+  <body data-layout="tall">
+    <header>
+      <strong>Speaker notes</strong>
+      <button id="demo-mode-switch" hidden>Use images</button>
+      <label>Layout
+        <select id="layout">
+          <option value="tall">Tall</option>
+          <option value="default">Default</option>
+          <option value="wide">Wide</option>
+          <option value="notes-only">Notes only</option>
+        </select>
+      </label>
+    </header>
+    <div id="speaker-error" role="alert" hidden></div>
+    <main>
+      <section id="current-slide" class="preview">
+        <h2>Current <span id="current-number"></span></h2>
+        <iframe id="current-frame" title="Current slide preview" tabindex="-1"></iframe>
+      </section>
+      <section id="upcoming-slide" class="preview">
+        <h2>Next <span id="next-number"></span></h2>
+        <iframe id="next-frame" title="Next slide preview" tabindex="-1"></iframe>
+        <p id="end-of-deck" hidden>End of presentation</p>
+      </section>
+      <section id="speaker-notes">
+        <h2>Notes</h2>
+        <div id="notes"></div>
+      </section>
+    </main>
+    <footer>
+      <div><span class="time-label">Clock</span><time id="clock"></time></div>
+      <div><span class="time-label">Elapsed</span><time id="elapsed">00:00:00</time></div>
+      <button id="reset-timer">Reset timer</button>
+      <nav aria-label="Presentation navigation">
+        <button id="previous" aria-label="Previous slide or reveal">&#8592;</button>
+        <button id="next" aria-label="Next slide or reveal">&#8594;</button>
+      </nav>
+    </footer>
+    <script type="module" src="./src/speaker.js"></script>
+  </body>
+</html>

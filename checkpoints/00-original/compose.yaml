@@ -1,0 +1,182 @@
+name: kickstopper-00-original
+
+x-backend: &backend
+  image: kickstopper-00-backend:local
+  build: ./backend
+  init: true
+  restart: unless-stopped
+  environment: &environment
+    DATABASE_URL: postgres://${POSTGRES_USER:-kickstopper}:${POSTGRES_PASSWORD:-kickstopper-local}@postgres:5432/${POSTGRES_DB:-kickstopper}
+    REDIS_URL: redis://cache:6379
+    AMQP_URL: amqp://kickstopper:kickstopper-local@queue:5672
+    SEARCH_URL: http://search:7700
+    SEARCH_KEY: ${MEILI_MASTER_KEY:-kickstopper-search-local-only}
+    VECTOR_URL: http://vectors:6333
+    ANALYTICS_URL: http://warehouse:8123
+    ANALYTICS_USER: ${CLICKHOUSE_USER:-kickstopper}
+    ANALYTICS_PASSWORD: ${CLICKHOUSE_PASSWORD:-kickstopper-local}
+
+services:
+  frontend:
+    image: kickstopper-00-frontend:local
+    build: ./frontend
+    ports:
+      - "127.0.0.1:3000:80"
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1/health"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+    restart: unless-stopped
+
+  api:
+    <<: *backend
+    command: ["sh", "-c", "node src/bootstrap.js && node src/server.js"]
+    ports:
+      - "127.0.0.1:3001:3001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      cache:
+        condition: service_healthy
+      search:
+        condition: service_healthy
+      vectors:
+        condition: service_healthy
+      warehouse:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "node", "src/healthcheck.js", "3001"]
+      interval: 5s
+      timeout: 4s
+      retries: 24
+      start_period: 20s
+
+  worker:
+    <<: *backend
+    command: ["node", "src/worker.js"]
+    depends_on:
+      api:
+        condition: service_healthy
+      queue:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "node", "src/healthcheck.js", "3002"]
+      interval: 5s
+      timeout: 4s
+      retries: 12
+
+  scheduler:
+    <<: *backend
+    command: ["node", "src/scheduler.js"]
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "node", "src/healthcheck.js", "3003"]
+      interval: 5s
+      timeout: 4s
+      retries: 12
+
+  postgres:
+    image: postgres:17.6-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-kickstopper}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-kickstopper-local}
+      POSTGRES_DB: ${POSTGRES_DB:-kickstopper}
+    ports:
+      - "127.0.0.1:54320:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./database:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  cache:
+    image: redis:8.2.1-alpine
+    restart: unless-stopped
+    command: ["redis-server", "--save", "", "--appendonly", "no"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+
+  queue:
+    image: rabbitmq:4.1.4-alpine
+    restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: kickstopper
+      RABBITMQ_DEFAULT_PASS: kickstopper-local
+    volumes:
+      - queue-data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "check_running"]
+      interval: 5s
+      timeout: 5s
+      retries: 24
+
+  search:
+    image: getmeili/meilisearch:v1.16.0
+    restart: unless-stopped
+    environment:
+      MEILI_MASTER_KEY: ${MEILI_MASTER_KEY:-kickstopper-search-local-only}
+      MEILI_NO_ANALYTICS: "true"
+      MEILI_ENV: production
+      MEILI_MAX_INDEXING_MEMORY: 256Mb
+      MEILI_MAX_INDEXING_THREADS: "2"
+    volumes:
+      - search-data:/meili_data
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:7700/health"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  vectors:
+    image: qdrant/qdrant:v1.15.4
+    restart: unless-stopped
+    environment:
+      QDRANT__TELEMETRY_DISABLED: "true"
+    volumes:
+      - vector-data:/qdrant/storage
+    healthcheck:
+      test: ["CMD", "bash", "-c", "echo > /dev/tcp/127.0.0.1/6333"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  warehouse:
+    image: clickhouse/clickhouse-server:25.8.4.13
+    restart: unless-stopped
+    environment:
+      CLICKHOUSE_DB: kickstopper
+      CLICKHOUSE_USER: ${CLICKHOUSE_USER:-kickstopper}
+      CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD:-kickstopper-local}
+      CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: "1"
+    volumes:
+      - warehouse-data:/var/lib/clickhouse
+      - ./warehouse/config.xml:/etc/clickhouse-server/config.d/demo.xml:ro
+    healthcheck:
+      test: ["CMD-SHELL", "clickhouse-client --user \"$$CLICKHOUSE_USER\" --password \"$$CLICKHOUSE_PASSWORD\" --query 'SELECT 1'"]
+      interval: 5s
+      timeout: 4s
+      retries: 24
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+
+volumes:
+  postgres-data:
+  queue-data:
+  search-data:
+  vector-data:
+  warehouse-data:
