@@ -79,7 +79,7 @@ Like screenshot capture, this read-only helper temporarily switches 05/06 and re
 
 Choose **Images** in the top bar, press **I** in the local deck, or choose **Use images** in speaker view. Every live demo iframe is unloaded and replaced with a bundled screenshot. Images mode makes **no Docker-controller or live-app requests**, including when starting directly with `?demo=images`. The mode is remembered across refreshes.
 
-Images automatically match each slide's checkpoint. **Image checkpoint** overrides the screenshot on the current slide only; moving to another slide restores that slide's planned checkpoint. These selections never start/stop Docker. Long screenshots scroll inside the same demo area, just like the live app. **Open image** opens the local capture at full size.
+Images automatically match each slide's checkpoint. In the local presenter app, **Image checkpoint** overrides the screenshot on the current slide only; moving to another slide restores that slide's planned checkpoint. These selections never start/stop Docker. The public/static build disables this selector so images always follow the slides. Long screenshots scroll inside the same demo area, just like the live app. **Open image** opens the local capture at full size.
 
 The snapshots cover all seven checkpoints and all five app views (browse, architecture, funding, analytics, project), so manual overrides also work offline. Speaker previews use these captures too, including a current-slide override. Image labels explicitly identify a captured snapshot rather than live telemetry. The public/static build defaults to Images mode.
 

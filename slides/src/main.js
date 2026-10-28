@@ -228,9 +228,11 @@ function renderStatus(force = false) {
   document.querySelector('label[for="checkpoint"]').textContent = mode === 'images' ? 'Image checkpoint' : 'Demo checkpoint';
   statusPanel.hidden = mode === 'images' || receiver;
   if (mode === 'images' || receiver) {
-    select.disabled = false;
+    select.disabled = !local;
     select.value = selectedImageCheckpoint(deck.getCurrentSlide());
-    select.title = 'Override the image on this slide only. This never changes Docker.';
+    select.title = local
+      ? 'Override the image on this slide only. This never changes Docker.'
+      : 'Images follow each slide. Checkpoint overrides are available only in the local presenter app.';
     refreshFrames(force);
     return;
   }
@@ -358,10 +360,10 @@ async function start() {
     select.add(new Option(`${checkpoint.id} / ${checkpoint.label}`, checkpoint.id));
   }
   select.options[0].textContent = 'Choose a checkpoint';
-  select.addEventListener('change', switchCheckpoint);
   modeSelect.querySelector('[value="live"]').disabled = !local;
   modeSelect.addEventListener('change', () => setDemoMode(modeSelect.value));
   if (local) {
+    select.addEventListener('change', switchCheckpoint);
     deck.addKeyBinding({ keyCode: 73, key: 'I', description: 'Toggle live/image demos' }, () => setDemoMode(mode === 'live' ? 'images' : 'live'));
     document.querySelector('#retry-connection').addEventListener('click', poll);
   }
